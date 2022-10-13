@@ -15,9 +15,8 @@ class PhotoController extends Controller
      */
     public function index()
     {
-        return  response()->json([
-            'name'=> 'test',
-        ]);
+        $photos = Photo::all();
+        return response()->json($photos);
     }
 
     /**
@@ -27,7 +26,7 @@ class PhotoController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
