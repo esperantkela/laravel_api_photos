@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\AuthentificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('photos', PhotoController::class);
+Route::post('/login', [AuthentificationController::class, 'login']);
+Route::post('/register', [AuthentificationController::class, 'register']);
