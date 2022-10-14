@@ -24,7 +24,7 @@ class AuthentificationController extends Controller
 
         if($validator->fails()){
             return response()->json([
-                'error' => $validator->errors(),
+                'errors' => $validator->errors(),
             ],401);
         }
         $user = User::create([
@@ -46,7 +46,7 @@ class AuthentificationController extends Controller
 
         if($validator->fails()){
             return response()->json([
-                'error' => $validator->errors(),
+                'errors' => $validator->errors(),
             ], 401);
         }
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
@@ -55,7 +55,7 @@ class AuthentificationController extends Controller
             return response()->json( $user);
         }else{
             return response()->json([
-                'error' => 'Mauvais identifiant de connexon'
+                'errors' => 'bad_credentials'
             ], 401);
         }
     }
