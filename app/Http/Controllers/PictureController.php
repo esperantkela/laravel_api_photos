@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Picture;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PictureController extends Controller
 {
@@ -34,6 +37,20 @@ class PictureController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validator = Validator::make($request->all(),[
+            'title' => 'required|string|min:3',
+            'description' => 'required|string|min:5',
+            'image' => 'required|image'
+
+        ]);
+
+        if($validator->fails()){
+            return response()->json([
+                'errors' => $validator->errors()
+            ], 401);
+        }
+
         $fullFilename = $request->file('image')->getClientOriginalName();
 
         $filename = pathinfo( $fullFilename, PATHINFO_FILENAME);
@@ -43,10 +60,14 @@ class PictureController extends Controller
 
         $request->file('image')->storeAs('public/pictures', $file);
 
-        return response()->json($file);
-        $picture = Picture::create(
+        $picture = Picture::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'image' => $file,
+            'user_id' => 1
+        ]);
 
-        );
+        return response()->json($picture, 200);
     }
 
     /**
