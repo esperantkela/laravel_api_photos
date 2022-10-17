@@ -64,7 +64,7 @@ class PictureController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'image' => $file,
-            'user_id' => 1
+            'user_id' => Auth::user()->id
         ]);
 
         return response()->json($picture, 200);
