@@ -41,6 +41,8 @@ class PictureController extends Controller
 
         $file = $filename . '_'. time() . '.' . $extension;
 
+        $request->file('image')->storeAs('public/pictures', $file);
+
         return response()->json($file);
         $picture = Picture::create(
 
