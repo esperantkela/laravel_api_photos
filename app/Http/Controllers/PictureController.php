@@ -16,9 +16,13 @@ class PictureController extends Controller
      */
     public function index()
     {
-       $pictures = Picture::all();
+       try {
+        $pictures = Picture::with('user')->get();
 
        return response()->json($pictures);
+       } catch (\Exception $ex) {
+        return response()->json(['message' =>  $ex]);
+       }
     }
 
     /**
