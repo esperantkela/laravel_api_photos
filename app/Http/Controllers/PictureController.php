@@ -16,7 +16,9 @@ class PictureController extends Controller
      */
     public function index()
     {
-        //
+       $pictures = Picture::all();
+
+       return response()->json($pictures);
     }
 
     /**
