@@ -84,7 +84,13 @@ class PictureController extends Controller
      */
     public function show($id)
     {
-        //
+        $picture = Picture::find($id);
+        if(!$picture){
+            return response()->json([
+                'message' => 'Resource not found'
+            ],404);
+        }
+        return response()->json($picture);
     }
 
     /**

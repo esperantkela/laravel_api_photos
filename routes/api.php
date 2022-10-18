@@ -22,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('pictures', [PictureController::class, 'store'])->middleware('App\Http\Middleware\ReactMiddleware');
-Route::apiResource('pictures', PictureController::class)->except(['store']);
+Route::get('pictures', [PictureController::class, 'show'])->middleware('App\Http\Middleware\ReactMiddleware');
+Route::apiResource('pictures', PictureController::class)->except(['store', 'show']);
 Route::post('/login', [AuthentificationController::class, 'login']);
 Route::post('/register', [AuthentificationController::class, 'register']);
