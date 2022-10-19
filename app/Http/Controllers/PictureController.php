@@ -14,12 +14,17 @@ class PictureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function search(Request $request)
     {
        try {
-        $pictures = Picture::with('user')->get();
+        $param = $rquest->input('search');
+        if($param){
+            $pictures = Picture::where('title', 'like', '%' . $param . '%')->get();
+        }else{
+            $pictures = Picture::with('user')->get();
+        }
+        return response()->json($pictures);
 
-       return response()->json($pictures);
        } catch (\Exception $ex) {
         return response()->json(['message' =>  $ex]);
        }
