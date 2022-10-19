@@ -17,7 +17,7 @@ class PictureController extends Controller
     public function search(Request $request)
     {
        try {
-        $param = $rquest->input('search');
+        $param = $request->input('search');
         if($param){
             $pictures = Picture::where('title', 'like', '%' . $param . '%')->get();
         }else{
