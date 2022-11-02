@@ -89,7 +89,7 @@ class PictureController extends Controller
      */
     public function show($id)
     {
-        $picture = Picture::find($id);
+        $picture = Picture::with('user')->find($id);
         if(!$picture){
             return response()->json([
                 'message' => 'Resource not found'
